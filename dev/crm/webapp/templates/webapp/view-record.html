@@ -1,0 +1,42 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+        <strong>{{ record.first_name|upper }}&nbsp;{{ record.last_name|upper }}</strong>
+        <hr> 
+        <p><strong> E-mail: </strong> {{ record.email }} </p>
+        <p><strong> Número de telefone: </strong> {{ record.phone }} </p>
+        <p><strong> Endereço: </strong> {{ record.address }} </p>
+        <p><strong> Cidade: </strong> {{ record.city }} </p>
+        <p><strong> Estado: </strong> {{ record.province }} </p>
+        <p><strong> País: </strong> {{ record.country }} </p>
+        <p><strong> Data de criação: </strong> {{ record.creation_date }} </p>
+    </div>
+</div>
+
+<br>
+
+<a href="{% url 'update-record' record.id %}" class="btn btn-info">
+    Atualizar registro &nbsp; <i class="fa fa-refresh" aria-hidden="true"></i>
+</a>
+
+<a id="btn-venda-feita" href="{% url 'dashboard' %}?action=venda_feita" class="btn btn-success">
+    Venda Feita &nbsp; <i class="fa fa-check-circle" aria-hidden="true"></i>
+</a>
+
+<a id="btn-venda-pendente" href="{% url 'dashboard' %}?action=venda_pendente" class="btn btn-warning">
+    Venda Pendente &nbsp; <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+</a>
+
+<a href="{% url 'dashboard' %}" class="btn btn-secondary">
+    Retornar &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</a>
+
+<a href="{% url 'delete-record' record.id %}" class="btn btn-danger">
+    Excluir &nbsp; <i class="fa fa-minus-square" aria-hidden="true"></i>
+</a>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'webapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="text-center">
+                <img src="{% static 'img/e3.jpg' %}" alt="E3 Logo" class="img-fluid rounded-circle mb-4" style="max-width: 200px;">
+                <h1 class="mb-3">Gestão no que há de melhor!</h1>
+                <p class="lead">Acompanhe seus registros de forma eficaz.</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Crie sua conta <i class="fa fa-user-plus ms-2"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

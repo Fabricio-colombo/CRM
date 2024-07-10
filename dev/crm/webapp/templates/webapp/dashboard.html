@@ -1,0 +1,100 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+
+<h5>Bem-vindo, {{ user }}! 👋</h5>
+
+<hr>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
+            Crie um novo registro &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'export-to-excel' %}">
+            Exportar para Excel &nbsp; <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div>
+        
+        <div class="input-group ml-2">
+            <input id="filterInput" type="text" class="form-control form-control-sm" placeholder="Digite para filtrar...">
+            <div class="input-group-append">
+                <button id="filterBtn" class="btn btn-outline-primary btn-sm" type="button">
+                    <i class="fa fa-search" aria-hidden="true"></i> Filtrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Contador de Clientes -->
+<div>
+    <span>Total Clientes: {{ records|length }}</span>
+</div>
+
+<!-- Tabela de Registros -->
+<table id="client-table" class="table table-hover table-bordered text-center">
+    <!-- Cabeçalho da Tabela -->
+    <thead class="table-light">
+        <tr>
+            <th scope="col"> ID </th>
+            <th scope="col"> Cliente</th>
+            <th scope="col"> E-mail </th>
+            <th scope="col"> Whatsapp </th>
+            <th scope="col"> Endereço </th>
+            <th scope="col"> Cidade </th>
+            <th scope="col"> Estado </th>
+            <th scope="col"> País </th>
+            <th scope="col"> Data de adesão </th>
+            <th scope="col"> Visualizar </th>
+        </tr>
+    </thead>
+    
+    <!-- Corpo da Tabela -->
+    <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ record.first_name }} {{ record.last_name }}</td>
+                <td>{{ record.email }}</td>
+                <td>{{ record.phone }}</td>
+                <td>{{ record.address }}</td>
+                <td>{{ record.city }}</td>
+                <td>{{ record.province }}</td>
+                <td>{{ record.country }}</td>
+                <td>{{ record.creation_date }}</td>
+                <td class="align-middle">
+                    <a class="btn btn-success btn-sm" href="{% url 'record' record.id %}">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#filterBtn').click(function() {
+            var filter = $('#filterInput').val().toUpperCase();
+            filterTable(filter);
+        });
+
+        function filterTable(filter) {
+            $('#client-table tbody tr').each(function() {
+                var rowText = $(this).text().toUpperCase();
+                if (rowText.indexOf(filter) > -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+</script>
+
+{% endblock %}

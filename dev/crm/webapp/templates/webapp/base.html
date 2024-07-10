@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>E3 Resultados</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
+
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+
+<!-- Navbar -->
+{% include 'webapp/navbar.html' %}
+
+<div class="container">
+    <br>
+
+    <!-- Notification messages -->
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <p id="message-timer" class="alert alert-success text-center message-text">
+                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; {{ message }}
+            </p>
+        {% endif %}
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!-- Your custom JavaScript -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<!-- Bootstrap JavaScript dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-Jgdk9dDz5+1KV4zU7+U6W2WskepCcd4FS1yA7kXBiX1GNLOFgwcjBxskAtdccnCZ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-cQFO+aQpXtfj1B9zOR2k4Ats4+37e1v5Vw8hAUvE+REc8cP8jwOxQyCEa3b85uTf" crossorigin="anonymous"></script>
+
+<!-- jQuery slim -->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha384-3L9a7vA/3DFTJL8fy8FzYpLD+2crSFjD1iF5mQb/8BU+Xa6wlsFkX/k2ZlE+3zZ3" crossorigin="anonymous"></script>
+
+</body>
+</html>
